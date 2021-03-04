@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.compiler-options.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declarationDir": "dummy/declarations",
+    "paths": {
+      "dummy/tests/*": ["./*"],
+      "dummy/*": ["./dummy/app/*", "./dummy/*"],
+      "ember-resource-tasks": ["../declarations"],
+      "ember-resource-tasks/*": ["../declarations/*"],
+      "*": ["../types/*"]
+    }
+  },
+  "include": [".", "../types"],
+  "references": [
+    { "path": "../addon" },
+    // { "path": "../addon-test-support" }
+  ]
+}
