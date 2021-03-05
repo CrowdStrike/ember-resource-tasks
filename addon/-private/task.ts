@@ -2,12 +2,12 @@ import { Resource } from 'ember-could-get-used-to-this';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 
-import { task } from 'ember-concurrency-decorators';
 import { taskFor } from 'ember-concurrency-ts';
+import { task } from 'ember-concurrency-decorators';
 
 import { consumeTag, waitFor } from './utils';
 
-import type { TaskInstance } from 'ember-concurrency';
+import type { TaskGenerator } from 'ember-concurrency';
 
 interface Args<Return, TaskArgs extends any[]> {
   named: {
@@ -21,8 +21,6 @@ interface Args<Return, TaskArgs extends any[]> {
  * All args must be stringish
  */
 export class Task<Return, TaskArgs extends any[]> extends Resource<Args<Return, TaskArgs>> {
-  private declare cacheBucket: Map<string, TaskInstance<Return>>;
-
   /**
    * @public
    *
@@ -38,20 +36,20 @@ export class Task<Return, TaskArgs extends any[]> extends Resource<Args<Return, 
     consumeTag(task, 'isFinished');
     consumeTag(task, 'error');
 
-    return { ...task, retry: this._perform };
+    // NOTE: some properties on a task are not iterable, therefore not included in the spread
+    //       This is probably fine, for the most part.
+    return { ...task, isRunning: task.isRunning, retry: this._perform };
   }
 
-  private get fn() {
-    return this.args.named.fn;
-  }
-
-  private get fnArgs() {
-    return this.args.named.args;
+  get _task() {
+    return taskFor(this.__task);
   }
 
   @task
   @waitFor
-  _task = taskFor(async () => {
+  *__task(this: Task<Return, TaskArgs>): TaskGenerator<Return> {
+    let { fn, args } = this.args.named;
+
     // Because async functions can set tracked data during rendering, (before an await is hit in execution)
     // we are presented with this assertion:
     //
@@ -59,12 +57,12 @@ export class Task<Return, TaskArgs extends any[]> extends Resource<Args<Return, 
     // but it had already been used previously in the same computation.
     // Attempting to update a value after using it in a computation can cause logical errors,
     // infinite revalidation bugs, and performance issues, and is not supported.
-    await Promise.resolve();
+    yield Promise.resolve();
 
-    let result = await this.fn(...this.fnArgs);
+    let result = yield fn(...args);
 
     return result;
-  });
+  }
 
   @action
   _perform() {

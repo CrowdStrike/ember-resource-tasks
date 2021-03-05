@@ -3,11 +3,11 @@ import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import { getOwner } from '@ember/application';
 
-import { task } from 'ember-concurrency-decorators';
 import { taskFor } from 'ember-concurrency-ts';
+import { task } from 'ember-concurrency-decorators';
 import { consumeTag, toCacheKey, waitFor } from './utils';
 
-import type { TaskInstance } from 'ember-concurrency';
+import type { TaskInstance, TaskGenerator } from 'ember-concurrency';
 
 type CacheableArgs = Array<string | string[]>;
 
@@ -50,25 +50,23 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
     return { ...task, isRunning: task.isRunning, retry: this._perform };
   }
 
-  private get fn() {
-    return this.args.named.fn;
-  }
-
-  private get fnArgs() {
-    return this.args.named.args;
-  }
-
   private get cacheKey() {
-    return toCacheKey(...this.fnArgs);
+    return toCacheKey(...this.args.named.args);
   }
 
   private get needsUpdate() {
     return !this.cacheBucket.has(this.cacheKey);
   }
 
+  get _task() {
+    return taskFor(this.__task);
+  }
+
   @task
   @waitFor
-  _task = taskFor(async () => {
+  *__task(this: MemoizedTask<Return, TaskArgs>): TaskGenerator<Return> {
+    let { fn, args } = this.args.named;
+
     // Because async functions can set tracked data during rendering, (before an await is hit in execution)
     // we are presented with this assertion:
     //
@@ -76,12 +74,12 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
     // but it had already been used previously in the same computation.
     // Attempting to update a value after using it in a computation can cause logical errors,
     // infinite revalidation bugs, and performance issues, and is not supported.
-    await Promise.resolve();
+    yield Promise.resolve();
 
-    let result = await this.fn(...this.fnArgs);
+    let result = yield fn(...args);
 
     return result;
-  });
+  }
 
   @action
   _perform() {
@@ -96,7 +94,9 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
   setup() {
     this.cacheBucket = getOwner(this).lookup(CACHE).getEnsuringBucket(this.args.named.cacheKey);
 
-    this._perform();
+    if (this.needsUpdate) {
+      this._perform();
+    }
   }
 
   update() {

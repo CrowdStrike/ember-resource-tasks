@@ -1,4 +1,3 @@
-import 'ember-concurrency-async';
-import 'ember-concurrency-ts/async';
+import 'ember-concurrency-ts';
 
 import './untyped-libraries';
