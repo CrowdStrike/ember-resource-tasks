@@ -111,7 +111,7 @@ When the template is rendered, the task will run and fetch initial data.
 Any changes to the `query` will cause `search` to be re-invoked, and
 `this.data.value` will be re-updated when `search` finishes.
 
-### Cacheing
+### Caching
 
 Sometimes you may want to cache Task results if there is a UI you're implementing
 where multiple sets of `args` can be toggled back and forth and you'd like to
@@ -126,7 +126,10 @@ import { MemoizedTask } from 'ember-resource-task';
 
 and there is an additional arg that it takes, `cacheKey`.
 This `cacheKey` is used to categorize your data, so that multiple instances of
-`MemoizedTask` may share data.
+`MemoizedTask` may share data. The `cacheKey` is kind of like a "bucket" that the
+cache for all fn/args pairs are grouped in to, so if you happen to have the same
+args between two MemoizedTasks, but different `cacheKey`s, they will not overwrite
+each other.
 
 Example:
 
