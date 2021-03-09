@@ -1,5 +1,8 @@
 # ember-resource-tasks
 
+[![CI](https://github.com/CrowdStrike/ember-resource-tasks/actions/workflows/ci.yml/badge.svg)](https://github.com/CrowdStrike/ember-resource-tasks/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/ember-resource-tasks.svg)](https://badge.fury.io/js/ember-resource-tasks)
+
 `ember-resource-tasks` is a collection of utility [Resources](https://github.com/pzuraq/ember-could-get-used-to-this#resources) for interacting with
 async data.
 
