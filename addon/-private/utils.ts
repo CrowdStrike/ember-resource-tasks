@@ -15,4 +15,3 @@ export function toCacheKey(...tokens: Array<string | string[]>) {
 export function valueFor<SomeResource extends Resource<LazyTrackedArgs>>(instance: SomeResource) {
   return (instance as unknown) as SomeResource['value'];
 }
-
