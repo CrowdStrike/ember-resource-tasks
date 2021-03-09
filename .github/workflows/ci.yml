@@ -78,8 +78,7 @@ jobs:
           - ember-canary
           - ember-concurrency-1.x
           - ember-concurrency-2.x
-          # Re-enable when we know how to render components that are registered in the test that they are rendered in
-          # - embroider
+          - embroider
     steps:
       - uses: actions/checkout@v2
       - uses: volta-cli/action@v1
