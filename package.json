@@ -1,6 +1,6 @@
 {
   "name": "ember-resource-tasks",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Resources for async functions in Ember",
   "keywords": [
     "ember-addon",
