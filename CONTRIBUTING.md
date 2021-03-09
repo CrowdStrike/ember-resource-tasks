@@ -18,6 +18,14 @@
 *   `ember test --server` – Runs the test suite in "watch mode"
 *   `ember try:each` – Runs the test suite against multiple Ember versions
 
+### Running tests for an ember-try scenario:
+
+```bash
+# ember try:one <scenario-name> --- <cli command in the context of this scenario>
+ember try:one ember-concurrency-2.x --- ember s
+```
+then visit http://localhost:4200/tests
+
 ## Running the dummy application
 
 *   `ember serve`
