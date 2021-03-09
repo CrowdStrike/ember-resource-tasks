@@ -5,7 +5,7 @@ import { getOwner } from '@ember/application';
 
 import { taskFor } from 'ember-concurrency-ts';
 import { task } from 'ember-concurrency-decorators';
-import { consumeTag, toCacheKey, waitFor } from './utils';
+import { consumeTag, extractTaskData, toCacheKey, waitFor } from './utils';
 
 import type { TaskInstance, TaskGenerator } from 'ember-concurrency';
 
@@ -45,9 +45,7 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
     consumeTag(task, 'isFinished');
     consumeTag(task, 'error');
 
-    // NOTE: some properties on a task are not iterable, therefore not included in the spread
-    //       This is probably fine, for the most part.
-    return { ...task, isRunning: task.isRunning, retry: this._perform };
+    return { ...extractTaskData(task), retry: this._perform };
   }
 
   private get cacheKey() {

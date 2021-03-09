@@ -5,7 +5,7 @@ import { assert } from '@ember/debug';
 import { taskFor } from 'ember-concurrency-ts';
 import { task } from 'ember-concurrency-decorators';
 
-import { consumeTag, waitFor } from './utils';
+import { consumeTag, waitFor, extractTaskData } from './utils';
 
 import type { TaskGenerator } from 'ember-concurrency';
 
@@ -36,9 +36,7 @@ export class Task<Return, TaskArgs extends any[]> extends Resource<Args<Return, 
     consumeTag(task, 'isFinished');
     consumeTag(task, 'error');
 
-    // NOTE: some properties on a task are not iterable, therefore not included in the spread
-    //       This is probably fine, for the most part.
-    return { ...task, isRunning: task.isRunning, retry: this._perform };
+    return { ...extractTaskData(task), retry: this._perform };
   }
 
   get _task() {

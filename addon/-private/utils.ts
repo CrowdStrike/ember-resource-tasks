@@ -1,4 +1,5 @@
 import { waitFor as _waitFor } from '@ember/test-waiters';
+import type { TaskInstance } from 'ember-concurrency';
 import type { Resource } from 'ember-could-get-used-to-this';
 
 export { get as consumeTag } from '@ember/object';
@@ -14,4 +15,17 @@ export function toCacheKey(...tokens: Array<string | string[]>) {
  */
 export function valueFor<SomeResource extends Resource<LazyTrackedArgs>>(instance: SomeResource) {
   return (instance as unknown) as SomeResource['value'];
+}
+
+/**
+ * NOTE: some properties on a task are not iterable, therefore not included in the spread
+ *   This is probably fine, for the most part.
+ *   This was more of an issue for ember-concurrency@v2 support though
+ */
+export function extractTaskData<Return>(task: TaskInstance<Return>) {
+  return {
+    ...task,
+    value: task.value,
+    isRunning: task.isRunning,
+  };
 }
