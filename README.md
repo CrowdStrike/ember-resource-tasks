@@ -39,7 +39,7 @@ import { use } from 'ember-could-get-used-to-this';
 import { action } from '@ember/object';
 import { Task } from 'ember-resource-tasks';
 
-class MyComponent extends Component {
+class MyComponent {
   @use data = new Task(() => {
     return {
       named: {
