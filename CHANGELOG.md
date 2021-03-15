@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.0.0...v1.1.0) (2021-03-15)
+
+
+### Features
+
+* support embroider ([95d650c](https://github.com/CrowdStrike/ember-resource-tasks/commit/95d650c9e181dfa5e3c27b1afbb75ed1a4602d14))
+
 # 1.0.0 (2021-03-09)
 
 
