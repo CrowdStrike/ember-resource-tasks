@@ -21,6 +21,7 @@ ember install ember-resource-tasks
 - Ember.js v3.24 or above
 - Node.js v12 or above
 - ember-concurrency v1+ and v2+
+- Embroider 0.37.0+
 
 ## Usage
 
