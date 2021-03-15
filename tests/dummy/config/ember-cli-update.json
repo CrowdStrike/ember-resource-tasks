@@ -15,6 +15,15 @@
           ]
         }
       ]
+    },
+    {
+      "name": "ember-addon-automated-ci",
+      "version": "1.0.2",
+      "blueprints": [
+        {
+          "name": "ember-addon-automated-ci"
+        }
+      ]
     }
   ]
 }
