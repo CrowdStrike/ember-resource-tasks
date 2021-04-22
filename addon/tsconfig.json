@@ -6,6 +6,7 @@
     "paths": {
       "ember-resource-tasks": ["."],
       "ember-resource-tasks/*": ["./*"],
+      "@ember/destroyable": ["node_modules/ember-destroyable-polyfill"],
       "*": ["../types"]
     }
   },
