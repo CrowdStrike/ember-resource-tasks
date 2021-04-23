@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.1.0...v1.1.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* **memoized-task:** now canceled tasks are automatically retried ([0ce0373](https://github.com/CrowdStrike/ember-resource-tasks/commit/0ce0373b90da7658de416f7c4dfa781f252cd266))
+
 # [1.1.0](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.0.0...v1.1.0) (2021-03-15)
 
 
