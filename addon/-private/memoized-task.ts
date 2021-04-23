@@ -2,6 +2,7 @@ import { Resource } from 'ember-could-get-used-to-this';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import { getOwner } from '@ember/application';
+import { DEBUG } from '@glimmer/env';
 
 import { taskFor } from 'ember-concurrency-ts';
 import { task } from 'ember-concurrency-decorators';
@@ -20,6 +21,9 @@ interface Args<Return, TaskArgs extends CacheableArgs> {
 }
 
 const CACHE = 'service:ember-resource-tasks/-private/do-not-use/arg-cache';
+
+export const TASK_PROPERTY = Symbol('TASK');
+export const TASK_INSTANCE_FROM_CACHE = Symbol('TASK_FROM_CACHE');
 
 /**
  * Whenever any args change *value*, the task will re run
@@ -45,7 +49,14 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
     consumeTag(task, 'isFinished');
     consumeTag(task, 'error');
 
-    return { ...extractTaskData(task), retry: this._perform };
+    let result = { ...extractTaskData(task), retry: this._perform };
+
+    if (DEBUG) {
+      (result as any)[TASK_INSTANCE_FROM_CACHE] = task;
+      (result as any)[TASK_PROPERTY] = task;
+    }
+
+    return result;
   }
 
   private get cacheKey() {
@@ -53,7 +64,11 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
   }
 
   private get needsUpdate() {
-    return !this.cacheBucket.has(this.cacheKey);
+    if (!this.cacheBucket.has(this.cacheKey)) {
+      return true;
+    }
+
+    return this.cacheBucket.get(this.cacheKey)?.isCanceled;
   }
 
   get _task() {

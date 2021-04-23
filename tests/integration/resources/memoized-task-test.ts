@@ -6,9 +6,11 @@ import { setupTest } from 'ember-qunit';
 import { setOwner } from '@ember/application';
 import { settled } from '@ember/test-helpers';
 import { waitFor } from '@ember/test-waiters';
+import { destroy } from '@ember/destroyable';
 
 import { MemoizedTask, valueFor } from 'ember-resource-tasks';
 import { consumeTag } from 'ember-resource-tasks/-private/utils';
+import { TASK_INSTANCE_FROM_CACHE } from 'ember-resource-tasks/-private/memoized-task';
 
 import type ApplicationInstance from '@ember/application/instance';
 
@@ -112,5 +114,34 @@ module('Integration | Resource | MemoizedTask', function (hooks) {
 
     assert.equal(subject2.data.value, 5, 'the cache bucket transfers to other instances');
     assert.equal(invocations, 3, 'value used is from cache and not recomputed');
+  });
+
+  test(`a canceled task in the cache is ignored`, async function (assert) {
+    let subject = create(this.owner);
+
+    assert.equal(invocations, 0);
+    assert.equal(subject.data.value, undefined);
+
+    let taskInstance = (subject.data as any)[TASK_INSTANCE_FROM_CACHE];
+
+    destroy(subject);
+
+    await settled();
+
+    assert.equal(taskInstance.isCanceled, true, 'task is cancelled');
+    assert.equal(invocations, 1);
+
+    let subject2 = create(this.owner);
+
+    assert.equal(subject2.data.value, undefined);
+
+    await settled();
+
+    taskInstance = (subject2.data as any)[TASK_INSTANCE_FROM_CACHE];
+
+    assert.equal(taskInstance.isCanceled, false, 'task is not cancelled');
+
+    assert.equal(subject2.data.value, 1);
+    assert.equal(invocations, 2);
   });
 });
