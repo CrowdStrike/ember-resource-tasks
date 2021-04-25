@@ -23,9 +23,15 @@ export function valueFor<SomeResource extends Resource<LazyTrackedArgs>>(instanc
  *   This was more of an issue for ember-concurrency@v2 support though
  */
 export function extractTaskData<Return>(task: TaskInstance<Return>) {
+  // TODO: document why { ...task } doesn't work (get info about specific property descriptors)
   return {
-    ...task,
-    value: task.value,
+    error: task.error,
+    hasStarted: task.hasStarted,
+    isCanceled: task.isCanceled,
+    isError: task.isError,
     isRunning: task.isRunning,
+    isFinished: task.isFinished,
+    isSuccessful: task.isSuccessful,
+    value: task.value,
   };
 }
