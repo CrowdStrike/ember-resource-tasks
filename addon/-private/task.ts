@@ -8,6 +8,7 @@ import { task } from 'ember-concurrency-decorators';
 import { consumeTag, waitFor, extractTaskData } from './utils';
 
 import type { TaskGenerator } from 'ember-concurrency';
+import type { PublicAPI } from './types';
 
 interface Args<Return, TaskArgs extends any[]> {
   named: {
@@ -26,7 +27,7 @@ export class Task<Return, TaskArgs extends any[]> extends Resource<Args<Return, 
    *
    * This is the return value of a resource
    */
-  get value() {
+  get value(): PublicAPI<Return> {
     let task = this._task.last;
 
     assert(`A task failed to start`, task);

@@ -91,7 +91,7 @@
     "@types/ember__destroyable": "^3.22.0",
     "@types/ember__engine": "^3.16.2",
     "@types/ember__error": "^3.16.1",
-    "@types/ember__object": "^3.12.3",
+    "@types/ember__object": "^3.12.5",
     "@types/ember__polyfills": "^3.12.1",
     "@types/ember__routing": "^3.16.9",
     "@types/ember__runloop": "^3.16.3",
@@ -142,7 +142,7 @@
     "remark-lint": "^8.0.0",
     "remark-preset-lint-recommended": "^5.0.0",
     "semantic-release": "^17.4.0",
-    "typescript": "^4.1.5"
+    "typescript": "4.1.5"
   },
   "remarkConfig": {
     "plugins": [
