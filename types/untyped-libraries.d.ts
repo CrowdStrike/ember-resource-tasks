@@ -16,4 +16,3 @@ declare module 'ember-could-get-used-to-this' {
     abstract readonly value: unknown;
   }
 }
-

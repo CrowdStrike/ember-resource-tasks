@@ -9,6 +9,7 @@ import { task } from 'ember-concurrency-decorators';
 import { consumeTag, extractTaskData, toCacheKey, waitFor } from './utils';
 
 import type { TaskInstance, TaskGenerator } from 'ember-concurrency';
+import type { PublicAPI } from './types';
 
 type CacheableArgs = Array<string | string[]>;
 
@@ -39,7 +40,7 @@ export class MemoizedTask<Return, TaskArgs extends CacheableArgs> extends Resour
    *
    * This is the return value of a resource
    */
-  get value() {
+  get value(): PublicAPI<Return> {
     let task = this.cacheBucket.get(this.cacheKey);
 
     assert(`A task failed to start`, task);
