@@ -45,16 +45,15 @@ class MyComponent {
     return {
       named: {
         args: [this.argA, this.argB]
-        fn: this.asyncFunction,
+        fn: async (argA, argB) => {
+
+        },
       }
     }
   });
 
   @tracked argA = 0;
   @tracked argB = 0;
-
-  @action
-  asyncFunction(argA, argB) { /* ... */ }
 }
 ```
 
@@ -143,7 +142,7 @@ Example:
     named: {
       cacheKey: 'contacts', // or any string
       args: [this.someTrackedArg],
-      fn: this.someFn,
+      fn: (someTrackedArgValue) => { ... }
     }
   }
 });
