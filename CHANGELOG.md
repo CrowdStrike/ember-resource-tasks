@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.1.1...v2.0.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* **ts:** support TS4.2 and latest @types/ember ([f9f11a3](https://github.com/CrowdStrike/ember-resource-tasks/commit/f9f11a35662aa9c7461bd5f4bc8486f39e66022b))
+
+
+### BREAKING CHANGES
+
+* **ts:** public api has narrowed.
+see: addon/-private/types.ts
+
 ## [1.1.1](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.1.0...v1.1.1) (2021-04-23)
 
 
