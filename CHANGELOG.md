@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.0...v2.0.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* **readme:** bump minimum supportetd embroider (still pre 1.0) ([6fa02a3](https://github.com/CrowdStrike/ember-resource-tasks/commit/6fa02a3376ea59d23f10ee0359199776a05b397e))
+
 # [2.0.0](https://github.com/CrowdStrike/ember-resource-tasks/compare/v1.1.1...v2.0.0) (2021-04-28)
 
 
