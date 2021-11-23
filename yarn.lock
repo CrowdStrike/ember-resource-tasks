@@ -6418,7 +6418,7 @@ ember-qunit@^5.1.4:
     silent-error "^1.1.1"
     validate-peer-dependencies "^1.2.0"
 
-ember-resolver@^8.0.2:
+ember-resolver@^8.0.3:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-8.0.3.tgz#40f243aa58281bf195c695fe84a6b291e204690a"
   integrity sha512-fA53fxfG821BRqNiB9mQDuzZpzSRcSAYZTYBlRQOHsJwoYdjyE7idz4YcytbSsa409G5J2kP6B+PiKOBh0odlw==
@@ -6458,7 +6458,7 @@ ember-source-channel-url@^3.0.0:
   dependencies:
     node-fetch "^2.6.0"
 
-ember-source@^3.26.1:
+ember-source@^3.28.6:
   version "3.28.6"
   resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.28.6.tgz#ed0f200fa6cb76dffabe3cce73417d7b290d6e98"
   integrity sha512-CW92R8qa6x6fedJcIl71QvR8vj1c4f0I5LgAKB5eXoFhdDXD+peRtPPuc1i+C+1/ojvaWfDO3RpFcxkiXqvSQA==
