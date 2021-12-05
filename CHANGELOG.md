@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.1...v2.0.2) (2021-12-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ember-cli-htmlbars to ^6.0.1 ([9ddbe3d](https://github.com/CrowdStrike/ember-resource-tasks/commit/9ddbe3deb77ca55ade5b5ec42db57aaddb0d839a))
+
 ## [2.0.1](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.0...v2.0.1) (2021-11-23)
 
 
