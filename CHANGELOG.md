@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.2...v2.0.3) (2021-12-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ember-cli-babel to ^7.26.8 ([67283ef](https://github.com/CrowdStrike/ember-resource-tasks/commit/67283ef0896e56c5c4f9b3cd24d19b727ef43d45))
+
 ## [2.0.2](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.1...v2.0.2) (2021-12-05)
 
 
