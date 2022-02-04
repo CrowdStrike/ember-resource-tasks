@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.5...v2.0.6) (2022-02-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ember-cli-typescript to v5 ([70fdd41](https://github.com/CrowdStrike/ember-resource-tasks/commit/70fdd411dac4122290249435ed3de78192f421a6))
+
 ## [2.0.5](https://github.com/CrowdStrike/ember-resource-tasks/compare/v2.0.4...v2.0.5) (2022-01-26)
 
 
